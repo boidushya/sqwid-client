@@ -20,6 +20,8 @@ const Connect = async (account) => {
 
     const { signer } = await Interact (account.address);
 
+    const backend = `https://coralmarketplacesystems.xyz`;
+
 	if (!!signRaw) {
         if (!(await signer.isClaimed())) {
             return {
@@ -27,24 +29,26 @@ const Connect = async (account) => {
                 signer
             }
         }
-        let res = await axios.get(`${process.env.REACT_APP_API_URL}/nonce?address=${account.address}`);
-        let { nonce } = res.data;
+        // return;
+        let res = await axios.get(`${backend}/user/nonce/${account.address}`);
+        let nonce = res.data;
 
         const sres = await signRaw ({
 			address: account.address,
-			data: stringToHex (nonce),
+			data: stringToHex ("Sign this nonce to authenticate in Sqwid Marketplace: " + nonce),
 			type: 'bytes'
 		});
+        let error = null;
 
         const { signature } = sres;
 		try{
-			res = await axios (`${process.env.REACT_APP_API_URL}/auth`, {
+			res = await axios (`${backend}/authenticate`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				data: JSON.stringify ({
-					address: account.address,
+					publicAddress: account.address,
 					signature: signature,
                     evmAddress: await signer.getAddress (),
 				})
@@ -52,11 +56,11 @@ const Connect = async (account) => {
 		}
 		catch(err){
             // handle err like a normal person 👍
+            error = err;
 		}
 
-        let json = res.data;
-
-        if (json.status === 'success') {
+        if (!error) {
+            let json = res.data;
             localStorage.removeItem ('collections');
             let jwts = localStorage.getItem ('tokens');
             jwts = jwts ? JSON.parse (jwts) : [];
