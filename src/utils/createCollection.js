@@ -1,15 +1,21 @@
 import axios from "axios";
+import { getBackend } from "./network";
 
 const createCollection = async (file,name,description) => {
 	const data = new FormData();
-	data.append("fileData", file);
-	data.append("name", name);
-	data.append("description", description);
+	// data.append("fileData", file);
+	// data.append("name", name);
+	// data.append("description", description);
+	data.append ("name", name);
+	data.append ("description", description);
+	data.append ("logo", file);
+	data.append ("banner", file);
+	
 	const address = JSON.parse (localStorage.getItem ("auth"))?.auth.address;
 	let jwt = address ? JSON.parse (localStorage.getItem ("tokens")).find (token => token.address === address) : null;
 	if (jwt) {
 		try {
-			return await axios.post (`${process.env.REACT_APP_API_URL}/create/collection`, data, {
+			return await axios.post (`${getBackend ()}/collection`, data, {
 				headers: {
 					'Authorization': `Bearer ${jwt.token}`,
 				}

@@ -11,6 +11,7 @@ import useIsTabletOrMobile from "@utils/useIsTabletOMobile";
 import bread from "@utils/bread";
 import CardSectionContainer from "@elements/Default/CardSectionContainer";
 import Wrapper from "@elements/ProfileRedesign/Wrapper";
+import { getBackend } from "@utils/network";
 
 const Container = styled.div`
 	position: absolute;
@@ -42,16 +43,31 @@ const CollectionsSection = () => {
 	const [isLoading, setIsLoading] = useState(true)
 	const isTabletOrMobile = useIsTabletOrMobile();
 	useEffect(() => {
-		axios.get(`${process.env.REACT_APP_API_URL}/get/collections/owner/${userID}`)
+		// const backend = `https://coralmarketplacesystems.xyz`;
+		/*
+		{
+			id: "GGHhLhgdCMM734MW529X",
+			data: {
+				description: "Procedurally Generated Planets",
+				owner: "5FYmfz6QSbwQZ1MrYLhfdGVADmPyUZmE8USLBkYP4QmgkgDA",
+				image: "ipfs://bafybeifiqxmz77vt2xyefpmyiyh365cegitejl4yzr57uxnev5bzxdfkym/logo.png",
+				name: "CryptoSpheres",
+				created: 1636380746338
+			}
+		},
+		*/
+		axios.get(`${getBackend ()}/collection/by-user/${userID}`)
 			.then((res) => {
-				localStorage.setItem("collections", JSON.stringify(res.data.collections))
-				setCards(res.data.collections.map(item => {
+				console.log (res.data);
+				let arr = res.data.map (item => {
 					return {
-						src: getCloudflareURL(item.data.image),
-						title: item.data.name,
-						link: `${window.location.origin}/collections/${item.id}`
+						src: item.logo,
+						title: item.name,
+						link: `${window.location.origin}/collections/${item.id}`,
 					}
-				}))
+				})
+				// localStorage.setItem("collections", JSON.stringify(res.data.collections))
+				setCards(arr);
 			})
 			.catch(err => {
 				bread(err.response.data.error)

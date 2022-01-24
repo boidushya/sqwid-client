@@ -3,7 +3,7 @@ import { WsProvider } from "@polkadot/api";
 import { web3Accounts, web3Enable, web3FromSource } from "@polkadot/extension-dapp";
 import { stringToHex } from '@polkadot/util';
 import axios from "axios";
-import { getRPC } from "./network";
+import { getBackend, getRPC } from "./network";
 // const WS_URL = 'wss://rpc-testnet.reefscan.com/ws';
 
 let provider;
@@ -20,7 +20,7 @@ const Connect = async (account) => {
 
     const { signer } = await Interact (account.address);
 
-    const backend = `https://coralmarketplacesystems.xyz`;
+    const backend = getBackend ();
 
 	if (!!signRaw) {
         if (!(await signer.isClaimed())) {

@@ -5,6 +5,7 @@ import React, { Suspense, useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from 'axios';
 import LoadingIcon from "@static/svg/LoadingIcon";
+import { getBackend } from "@utils/network";
 const Card = React.lazy(()=>import("@elements/Default/Card"));
 
 const Wrapper = styled.div`
@@ -83,9 +84,26 @@ const HeroSection = ({ id }) => {
 
 	useEffect (() => {
 		const fetchData = async () => {
-			const result = await axios (`${process.env.REACT_APP_API_URL}/get/r/marketplace/fetchMarketItems/collection/${id}`);
-			let items = result.data;
-			setCollectionsInfo (items);
+			// const result = await axios (`${process.env.REACT_APP_API_URL}/get/r/marketplace/fetchMarketItems/collection/${id}`);
+			const result = await axios (`${getBackend ()}/collection/${id}`);
+			console.log (result.data);
+			let data = {
+				thumb: result.data.logo,
+				name: result.data.name,
+				creator: {
+					name: '',
+					thumb: '',
+					id: result.data.userPublicAddress
+				},
+				content: []
+			}
+
+			let userRes = await axios (`${getBackend ()}/user/${result.data.userPublicAddress}`);
+			console.log (userRes);
+			data.creator.name = userRes.data.name || (result.data.userPublicAddress.substring (0, 8) + '...');
+			data.creator.thumb = userRes.data.avatar || `https://avatars.dicebear.com/api/identicon/${result.data.userPublicAddress}.svg`;
+			// let items = result.data;
+			setCollectionsInfo (data);
 			setIsLoading (false);
 		}
 		fetchData ();

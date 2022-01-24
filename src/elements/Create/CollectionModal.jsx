@@ -12,6 +12,7 @@ import { getCloudflareURL } from "@utils/getIPFSURL";
 import FileContext from "@contexts/File/FileContext";
 import { BtnBaseAnimated } from "@elements/Default/BtnBase";
 import bread from "@utils/bread";
+import { getBackend } from "@utils/network";
 
 const swipeDownwards = keyframes`
 	0% {
@@ -268,6 +269,7 @@ const New = ({ isActive, setIsActive }) => {
 		if(info.file&&info.name.length){
 			createCollection (info.file,info.name,info.description)
 			.then (res => {
+				console.log (res);
 				setButtonText("Created Collection!")
 				setTimeout(() => {
 					setIsActive({...isActive,status: false});
@@ -333,10 +335,22 @@ const Existing = ({ isActive, setIsActive }) => {
 	const { auth } = useContext(AuthContext);
 	const { files, setFiles } = useContext(FileContext);
 	useEffect(() => {
-		axios.get(`${process.env.REACT_APP_API_URL}/get/collections/owner/${auth.address}`)
+		// axios.get(`${process.env.REACT_APP_API_URL}/get/collections/owner/${auth.address}`)
+		axios.get(`${getBackend ()}/collection/by-user/${auth.address}`)
 		.then((res)=>{
-			localStorage.setItem("collections",JSON.stringify(res.data.collections))
-			setCollections(res.data.collections)
+			// localStorage.setItem("collections",JSON.stringify(res.data.collections))
+			console.log (res.data);
+			let data = res.data.map (item => {
+				return {
+					id: item.id,
+					data: {
+						name: item.name,
+						description: item.description,
+						image: item.logo,
+					}
+				}
+			})
+			setCollections(data)
 		})
 		.catch(err=>{
 			bread(err.response.data.error)
@@ -365,7 +379,7 @@ const Existing = ({ isActive, setIsActive }) => {
 							setIsActive({...isActive,status: false});
 						}}
 					>
-						<img src={getCloudflareURL(item.data.image)} alt={item.data.description}/>
+						<img src={item.data.image} alt={item.data.description}/>
 						<p>{item.data.name}</p>
 					</CollectionContainer>
 				))}
