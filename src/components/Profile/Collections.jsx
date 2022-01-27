@@ -4,7 +4,6 @@ import CollectionCard from "@elements/Profile/CollectionCard";
 import AuthContext from "@contexts/Auth/AuthContext";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { getCloudflareURL } from "@utils/getIPFSURL";
 import LoadingIcon from "@static/svg/LoadingIcon";
 import { respondTo } from "@styles/styledMediaQuery";
 import useIsTabletOrMobile from "@utils/useIsTabletOMobile";
@@ -58,7 +57,7 @@ const CollectionsSection = () => {
 		*/
 		axios.get(`${getBackend ()}/collection/by-user/${userID}`)
 			.then((res) => {
-				console.log (res.data);
+				// console.log (res.data);
 				let arr = res.data.map (item => {
 					return {
 						src: item.logo,

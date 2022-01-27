@@ -6,7 +6,7 @@ import { createCollectible } from "@utils/createCollectible";
 import { BtnBaseAnimated } from "@elements/Default/BtnBase";
 import Loading from "@elements/Default/Loading";
 import UploadCover from "./UploadCover";
-import { useHistory } from "react-router";
+// import { useHistory } from "react-router";
 import bread from "@utils/bread";
 
 const border = css`
@@ -122,7 +122,7 @@ const PreviewSection = () => {
 	const [fileType, setFileType] = useState("")
 	const [buttonText, setButtonText] = useState("Create Item")
 	const [isSubmitting, setIsSubmitting] = useState(false)
-	const history = useHistory ();
+	// const history = useHistory ();
 
 	useEffect (() => {
 		if (fileData.file){
@@ -152,7 +152,7 @@ const PreviewSection = () => {
 			// let id = 0;
 			createCollectible ({...files,...fileData})
 			.then(res=>{
-				console.log (res);
+				// console.log (res);
 				// history.push (`/collectible/${res}`);
 			})
 			.catch(err=>{

@@ -86,7 +86,7 @@ const HeroSection = ({ id }) => {
 		const fetchData = async () => {
 			// const result = await axios (`${process.env.REACT_APP_API_URL}/get/r/marketplace/fetchMarketItems/collection/${id}`);
 			const result = await axios (`${getBackend ()}/collection/${id}`);
-			console.log (result.data);
+			// console.log (result.data);
 			let data = {
 				thumb: result.data.logo,
 				name: result.data.name,
@@ -99,7 +99,7 @@ const HeroSection = ({ id }) => {
 			}
 
 			let userRes = await axios (`${getBackend ()}/user/${result.data.userPublicAddress}`);
-			console.log (userRes);
+			// console.log (userRes);
 			data.creator.name = userRes.data.name || (result.data.userPublicAddress.substring (0, 8) + '...');
 			data.creator.thumb = userRes.data.avatar || `https://avatars.dicebear.com/api/identicon/${result.data.userPublicAddress}.svg`;
 			// let items = result.data;

@@ -8,9 +8,10 @@ import { fetchMarketplaceItem, fetchMarketplaceItems } from "./marketplace";
 import { isMarketplaceApproved, approveMarketplace } from "./marketplaceApproval";
 import { getContract } from "./network";
 import { create as ipfsHttpClient } from "ipfs-http-client";
-import { getInfuraURL } from "./getIPFSURL";
+// import { getInfuraURL } from "./getIPFSURL";
 // import getMetaById from "./getMetaById";
 
+//eslint-disable-next-line
 const createCollectibleOld = async (files) => {
 	const { file, coverFile, name, description, properties, collection } = files;
 	const copies = Number (files.copies) || 1;
@@ -90,11 +91,12 @@ const uploadFile = async (file) => {
 		const addedFile = await ipfs.add (buffer);
 		return addedFile.path;
 	} catch (err) {
-		console.log (err);
+		// console.log (err);
 	}
 }
 
 const createCollectible = async (files) => {
+	//eslint-disable-next-line
 	const { file, coverFile, name, description, properties, collection } = files;
 	const copies = Number (files.copies) || 1;
 	const royalty = (Number (files.royalty) || 0) * 100;
@@ -118,14 +120,15 @@ const createCollectible = async (files) => {
 	let data = {
 		name,
 		description,
-		image: coverFile ? uploaded.find (u => u.index == 1).url : uploaded [0].url,
-		media: coverFile ? uploaded.find (u => u.index == 0).url : uploaded [0].url,	
+		image: coverFile ? uploaded.find (u => u.index === 1).url : uploaded[0].url,
+		media: coverFile ? uploaded.find (u => u.index === 0).url : uploaded[0].url,
 		attributes: attribs
 	}
 
 	let meta = await uploadFile (JSON.stringify (data));
 
 	const address = JSON.parse(localStorage.getItem("auth"))?.auth.address;
+	//eslint-disable-next-line
 	let jwt = address ? JSON.parse(localStorage.getItem("tokens")).find(token => token.address === address) : null;
 
 	let { signer } = await Interact (address);
@@ -143,15 +146,15 @@ const createCollectible = async (files) => {
 	try {
 		const nft = await collectibleContract.mint (to, copies, meta, to, royalty, true);
 		const receipt = await nft.wait ();
-		const tokenId = receipt.events [0].args ['id'].toNumber ();
+		const tokenId = receipt.events[0].args['id'].toNumber ();
 
 		const marketItem = await marketplaceContract.createItem (getContract ('reef_testnet', 'erc1155'), tokenId);
 		const receipt2 = await marketItem.wait ();
 
-		const itemId = receipt2.events [0].args ['itemId'].toNumber ();
+		const itemId = receipt2.events[0].args['itemId'].toNumber ();
 		return Number (itemId);
 	} catch (err) {
-		console.log (err);
+		// console.log (err);
 		return null;
 	}
 }

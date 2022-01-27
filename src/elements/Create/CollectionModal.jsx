@@ -8,7 +8,6 @@ import { createCollection } from "@utils/createCollection";
 import Loading from "@elements/Default/Loading";
 import axios from "axios";
 import AuthContext from "@contexts/Auth/AuthContext";
-import { getCloudflareURL } from "@utils/getIPFSURL";
 import FileContext from "@contexts/File/FileContext";
 import { BtnBaseAnimated } from "@elements/Default/BtnBase";
 import bread from "@utils/bread";
@@ -269,7 +268,7 @@ const New = ({ isActive, setIsActive }) => {
 		if(info.file&&info.name.length){
 			createCollection (info.file,info.name,info.description)
 			.then (res => {
-				console.log (res);
+				// console.log (res);
 				setButtonText("Created Collection!")
 				setTimeout(() => {
 					setIsActive({...isActive,status: false});
@@ -339,7 +338,7 @@ const Existing = ({ isActive, setIsActive }) => {
 		axios.get(`${getBackend ()}/collection/by-user/${auth.address}`)
 		.then((res)=>{
 			// localStorage.setItem("collections",JSON.stringify(res.data.collections))
-			console.log (res.data);
+			// console.log (res.data);
 			let data = res.data.map (item => {
 				return {
 					id: item.id,
