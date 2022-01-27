@@ -152,7 +152,8 @@ const PreviewSection = () => {
 			// let id = 0;
 			createCollectible ({...files,...fileData})
 			.then(res=>{
-				history.push (`/collectible/${res}`);
+				console.log (res);
+				// history.push (`/collectible/${res}`);
 			})
 			.catch(err=>{
 				bread(err.response.data.error)

@@ -5,7 +5,6 @@ export const getDwebURL = (url) => {
 	return `https://${randomAssString}.ipfs.dweb.link/${filename}`
 }
 
-export const getInfuraURL = (url) => {
-	let [randomAssString, filename] = url.slice(7).split("/")
-	return `https://${randomAssString}.ipfs.infura-ipfs.io/${filename}`;
+export const getInfuraURL = (hash) => {
+	return `https://ipfs.infura.io/ipfs/${hash}`;
 }
