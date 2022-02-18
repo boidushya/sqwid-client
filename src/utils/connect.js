@@ -1,7 +1,9 @@
 import { Provider, Signer } from "@reef-defi/evm-provider";
-import { WsProvider } from "@polkadot/api";
-import { web3Accounts, web3Enable, web3FromSource } from "@polkadot/extension-dapp";
-import { stringToHex } from '@polkadot/util';
+// import { WsProvider } from "@polkadot/rpc-provider";
+import { WsProvider } from '@polkadot/api';
+// import { options } from "@reef-defi/api";
+import { web3Accounts, web3Enable, web3FromSource } from "@reef-defi/extension-dapp";
+import { stringToHex } from '@reef-defi/util';
 import axios from "axios";
 import { getBackend, getRPC } from "./network";
 // const WS_URL = 'wss://rpc-testnet.reefscan.com/ws';
@@ -87,7 +89,10 @@ const Interact = async (address = null) => {
     const allInjected = await web3Enable ('Sqwid');
     const injected = allInjected[0].signer;
     if (!provider) provider = new Provider ({
-        provider: new WsProvider (getRPC ())
+        provider: new WsProvider (getRPC ()),
+        types: {
+            AccountInfo: 'AccountInfoWithTripleRefCount'
+        }
     });
     await provider.api.isReady;
 
@@ -101,7 +106,10 @@ const Interact = async (address = null) => {
 
 const GetProvider = async () => {
     if (!provider) provider = new Provider ({
-        provider: new WsProvider (getRPC ())
+        provider: new WsProvider (getRPC ()),
+        types: {
+            AccountInfo: 'AccountInfoWithTripleRefCount'
+        }
     });
     await provider.api.isReady;
     return provider;

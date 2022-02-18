@@ -238,7 +238,9 @@ const AccountSelect = ({ isActive, setIsActive, accounts }) => {
 				}
 			})
 			.catch(err => {
-				bread(err.response.data.error)
+				// bread(err.response.data.error)
+				// console.log (err);
+				bread (err);
 			})
 			.finally(() => {
 				setLoading(false);
