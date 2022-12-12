@@ -15,7 +15,7 @@ const constants = {
 		'Looks like nothing\'s "Available" here 🤔',
 		'Sorry pal, nothing\'s "On Sale" right now 😔',
 		'This place is currently "Auctioned" away 😶',
-		'This area seems to be "Raffled" off 📪',
+		'Your "Raffles" will appear here 📪',
 		'This section is on "Loan" 🤩',
 	],
 	STATE_TYPES_KEYS: ["sale", "auction", "raffle", "loan"],
