@@ -55,6 +55,11 @@ const InfoBtn = () => {
 							link: constants.DOCUMENTATION.base,
 							external: true,
 						},
+						{
+							name: "Feedback",
+							link: "https://sqwid.canny.io",
+							external: true,
+						}
 					]}
 				/>
 			)}
