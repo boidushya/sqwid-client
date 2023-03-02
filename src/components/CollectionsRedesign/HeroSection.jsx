@@ -517,36 +517,36 @@ const HeroSection = ({ collectionInfo, setIsLoading, isLoading }) => {
 								</span>
 							</Creator>
 						</HeaderContainer>
-						{false && <StatsWrapper>
+						{true && <StatsWrapper>
 							<StatContainer>
 								<Price>
-									<span>{numberSeparator(collectionInfo.stats.items)}</span>
+									<span>{numberSeparator(collectionInfo.stats?.items)}</span>
 								</Price>
 								<ContainerTitle>Items</ContainerTitle>
 							</StatContainer>
-							<StatContainer>
-								<Price>
-									<span>{numberSeparator(collectionInfo.stats.owners)}</span>
-								</Price>
-								<ContainerTitle>Owners</ContainerTitle>
-							</StatContainer>
-							<StatContainer>
-								<Price>
-									<span>{numberSeparator(collectionInfo.stats.salesAmount)}</span>
-								</Price>
-								<ContainerTitle># of Sales</ContainerTitle>
-							</StatContainer>
 							{/* <StatContainer>
 								<Price>
-									<ReefIcon centered size={24} />{" "}
-									<span>{numberSeparator(collectionInfo.stats.average)}</span>
+									<span>{numberSeparator(collectionInfo.stats?.owners)}</span>
 								</Price>
-								<ContainerTitle>Average</ContainerTitle>
+								<ContainerTitle>Owners</ContainerTitle>
 							</StatContainer> */}
 							<StatContainer>
 								<Price>
+									<span>{numberSeparator(collectionInfo.stats?.itemsSold)}</span>
+								</Price>
+								<ContainerTitle># of Sales</ContainerTitle>
+							</StatContainer>
+							<StatContainer>
+								<Price>
 									<ReefIcon centered size={24} />{" "}
-									<span>{numberSeparator(collectionInfo.stats.volume)}</span>
+									<span>{numberSeparator(Math.round (collectionInfo.stats?.average))}</span>
+								</Price>
+								<ContainerTitle>Average</ContainerTitle>
+							</StatContainer>
+							<StatContainer>
+								<Price>
+									<ReefIcon centered size={24} />{" "}
+									<span>{numberSeparator(collectionInfo.stats?.volume)}</span>
 								</Price>
 								<ContainerTitle>Volume</ContainerTitle>
 							</StatContainer>

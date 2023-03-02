@@ -596,14 +596,30 @@ const fetchCollectionStats = async id => {
 	// 		owners: 0
 	// 	};
 	// }
-	return {
-		volume: 0,
-		average: 0,
-		lastSale: 0,
-		salesAmount: 0,
-		items: 0,
-		owners: 0
-	};
+	// return {
+	// 	volume: 0,
+	// 	average: 0,
+	// 	lastSale: 0,
+	// 	salesAmount: 0,
+	// 	items: 0,
+	// 	owners: 0
+	// };
+	try {
+		const res = await axios(
+			`${getBackend()}/get/marketplace/collection/${id}/stats`
+		);
+		const { data } = res;
+		return data;
+	} catch (e) {
+		return {
+			volume: 0,
+			average: 0,
+			lastSale: 0,
+			itemsSold: 0,
+			items: 0,
+			owners: 0
+		};
+	}
 }
 
 const fetchCollectibleStats = async id => {
