@@ -753,14 +753,20 @@ const claimClaimables = async (itemId, tokenId) => {
 			};
 			return receipt;
 		} catch (e) {
-			await axios.post(`${getBackend()}/claim/${tokenId}`, {
-				remove: true
-			}, {
-				headers: {
-					Authorization: `Bearer ${jwt.token}`,
-					},
-				}
-			);
+			// console.log (e);
+			const retry = (e.toString () === "Error: Cancelled") ||
+				(e.toString () === "Error: -32603: execution fatal: Module { index: 6, error: 2, message: None }");
+			
+			if (!retry) {
+				await axios.post(`${getBackend()}/claim/${tokenId}`, {
+					remove: true
+				}, {
+					headers: {
+						Authorization: `Bearer ${jwt.token}`,
+						},
+					}
+				);
+			}
 			return {
 				error: true,
 				message: e.toString ()

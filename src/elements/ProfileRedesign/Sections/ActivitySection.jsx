@@ -131,12 +131,12 @@ const CardInfo = ({ data, claiming, setClaiming, setIsClaimed }) => {
 			if (res && !res.error) {
 				// setButtonText ("Claimed");
 				bread ('Claimed!');
+				setIsClaimed (true);
 			} else {
 				setButtonText (initialButtonText);
 				showErrorModal (res.message);
 			}
 			setClaiming (false);
-			setIsClaimed (true);
 		} catch (e) {
 			setButtonText (initialButtonText);
 			showErrorModal (e.toString ());
