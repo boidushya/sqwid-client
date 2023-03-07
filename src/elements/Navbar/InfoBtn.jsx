@@ -59,7 +59,12 @@ const InfoBtn = () => {
 							name: "Feedback",
 							link: "https://sqwid.canny.io",
 							external: true,
-						}
+						},
+						{
+							name: "Brand Assets",
+							link: "/branding",
+							external: true,
+						},
 					]}
 				/>
 			)}
