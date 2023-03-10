@@ -35,7 +35,7 @@ const CollectionsWrapper = styled.div`
     margin: 0 auto;
     margin-top: 2rem;
     margin-bottom: 1rem;
-    gap: .5rem;
+    gap: 1rem;
 `;
 
 const CollectionListItem = styled.div`
@@ -64,6 +64,7 @@ const CollectionListItem = styled.div`
 			opacity: 1;
 		}
 	}
+	border: 1px solid var(--app-container-bg-secondary);
 `;
 
 // const CollectionImage = styled.div`
