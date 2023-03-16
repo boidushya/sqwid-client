@@ -794,6 +794,21 @@ const transferCollectible = async (to, tokenId, amount) => {
 	const receipt = await tx.wait();
 	return receipt;
 }
+
+const fetchCollectionsByStats = async (order, startFrom = Infinity, startFromId = null, sort = 'desc', limit = 8) => {
+	try {
+		const res = await axios(
+			`${getBackend()}/get/collections/all/by/stats.${order}?sorting=${sort}&startAt=${startFrom}&startAtId=${startFromId}&limit=${limit}`
+		);
+		const { data } = res;
+		return data;
+	} catch (e) {
+		return {
+			collections: []
+		};
+	}
+}
+
 export {
 	unlistLoanProposal,
 	repayLoan,
@@ -827,6 +842,7 @@ export {
 	fetchClaimablesCount,
 	claimClaimables,
 	transferCollectible,
+	fetchCollectionsByStats,
 	// these are old, need to be removed
 	marketplaceItemExists,
 	fetchMarketplaceItem,
