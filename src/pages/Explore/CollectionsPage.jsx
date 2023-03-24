@@ -34,7 +34,7 @@ const Container = styled.div`
 const CollectionsWrapper = styled.div`
 	justify-content: center;
     display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(0, 38rem));
+	grid-template-columns: repeat(auto-fit, minmax(0, 35rem));
     width: 100%;
     margin: 0 auto;
     margin-top: 2rem;
