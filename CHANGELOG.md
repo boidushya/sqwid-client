@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.3.28 (2023-03-24)
+
+
+### Bug Fixes
+
+* show columns of collections on smaller resolution displays ([0d2349e](https://github.com/boidushya/sqwid-client/commit/0d2349e43f38b26fdbb0e19f79c5cfc35444f9a2))
+
 ### 0.3.27 (2023-03-08)
 
 ### 0.3.26 (2022-12-23)
