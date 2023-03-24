@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.3.29 (2023-03-24)
+
+
+### Features
+
+* enable stats for collections ([af4ac43](https://github.com/boidushya/sqwid-client/commit/af4ac43fbde4f46eca58b0c77d28bcea150d6ebd))
+
 ### 0.3.28 (2023-03-24)
 
 
