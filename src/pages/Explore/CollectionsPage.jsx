@@ -236,7 +236,7 @@ const CollectionsPage = () => {
 			<Wrapper>
 				<Container>
 					<HeaderContainer>
-						<DottedHeading size="2.5rem">Explore collections</DottedHeading>
+						<DottedHeading size="2.5rem">Explore top collections</DottedHeading>
 						<SortContainer>
 							<span>Sort by</span>
 							<StyledSelect
