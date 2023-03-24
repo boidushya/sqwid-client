@@ -518,7 +518,7 @@ const HeroSection = ({ collectionInfo, setIsLoading, isLoading }) => {
 							</Creator>
 						</HeaderContainer>
 						{/* TODO: remove false once collection stats are done */}
-						{false && <StatsWrapper>
+						{true && <StatsWrapper>
 							<StatContainer>
 								<Price>
 									<span>{numberSeparator(collectionInfo.stats?.items)}</span>
