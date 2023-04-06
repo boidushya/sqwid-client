@@ -25,7 +25,7 @@ const constants = {
 		raffle: "",
 		loan: "",
 	},
-	CREATE_ACCEPTED_MIMETYPES: ["image/jpeg", "image/png", "video/mp4"],
+	CREATE_ACCEPTED_MIMETYPES: ["image/jpeg", "image/png", "video/mp4", "image/webp"],
 	COVER_ACCEPTED_MIMETYPES: [
 		"image/jpeg",
 		"image/gif",
