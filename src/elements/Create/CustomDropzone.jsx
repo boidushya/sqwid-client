@@ -59,8 +59,8 @@ const Dropzone = props => {
 	// const initialDragText = props.modal ? "PNG, JPEG, GIF or WEBP. Max 30mb." : "PNG, GIF, WEBP, MP4, or MP3. Max 30mb."
 	// const initialDragText = "PNG or JPEG. Max 30mb.";
 	const initialDragText = props.cover
-		? "PNG, JPEG, GIF or WEBP. Max 30mb."
-		: "PNG, JPEG, MP4. Max 30mb.";
+		? "PNG, JPEG, GIF or WEBP. Max 100mb."
+		: "PNG, JPEG, MP4, WEBP. Max 100mb.";
 	const { fileData, setFileData } = useContext(FileContext);
 	const { collectionBulkData, setCollectionBulkData } = useContext(
 		CollectionBulkContext
@@ -145,7 +145,7 @@ const CustomDropzone = ({ modal, cover }) => {
 	return (
 		<LazyMotion features={domAnimation}>
 			<Wrapper>
-				<Dropzone modal={modal} maxSize={30000000} cover={cover} />
+				<Dropzone modal={modal} maxSize={100000000} cover={cover} />
 			</Wrapper>
 		</LazyMotion>
 	);
