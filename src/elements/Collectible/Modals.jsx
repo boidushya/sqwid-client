@@ -571,7 +571,7 @@ export const TransferModal = props => {
 						</span>	
 					)}
 					<InputTitle>
-						Number of copies{" "}
+						Number of editions{" "}
 						<span>
 							{Number(copies)} / {collectibleInfo.amount}
 						</span>
@@ -580,7 +580,7 @@ export const TransferModal = props => {
 						type="number"
 						value={copies}
 						onChange={handleCopiesInput}
-						placeholder={`Number of copies to send`}
+						placeholder={`Number of editions to send`}
 					/>
 				</InputWrapper>
 				<AnimBtn disabled={isLoading || !addressSelected} onClick={handleClick}>
@@ -802,7 +802,7 @@ export const CreateAuctionModal = props => {
 						placeholder={`Minimum bid for the lot in REEF`}
 					/>
 					<InputTitle>
-						Number of copies
+						Number of editions
 						<span>
 							{Number(copies)} / {collectibleInfo.amount}
 						</span>
@@ -811,7 +811,7 @@ export const CreateAuctionModal = props => {
 						type="number"
 						value={copies}
 						onChange={handleCopiesInput}
-						placeholder={`Number of copies for the lot`}
+						placeholder={`Number of editions for the lot`}
 					/>
 					<InputTitle>Number of Minutes</InputTitle>
 					<InputContainer
@@ -923,7 +923,7 @@ export const PutOnSaleModal = props => {
 						placeholder={`Enter Price (in Reef)`}
 					/>
 					<InputTitle>
-						Number of copies{" "}
+						Number of editions{" "}
 						<span>
 							{Number(copies)} / {collectibleInfo.amount}
 						</span>
@@ -932,7 +932,7 @@ export const PutOnSaleModal = props => {
 						type="number"
 						value={copies}
 						onChange={handleCopiesInput}
-						placeholder={`Number of copies for sale`}
+						placeholder={`Number of editions for sale`}
 					/>
 				</InputWrapper>
 				<InfoSection link="sale" fee={props.fee} />
@@ -1063,7 +1063,7 @@ export const LendModal = props => {
 						placeholder={`Amount to pay the lender as interest (in Reef)`}
 					/>
 					<InputTitle>
-						Number of copies
+						Number of editions
 						<span>
 							{Number(copies)} / {collectibleInfo.amount}
 						</span>
@@ -1072,7 +1072,7 @@ export const LendModal = props => {
 						type="number"
 						value={copies}
 						onChange={handleCopiesInput}
-						placeholder={`Number of copies for the lot`}
+						placeholder={`Number of editions for the lot`}
 					/>
 					<InputTitle>Duration</InputTitle>
 					<InputContainer
@@ -1170,7 +1170,7 @@ export const RaffleModal = props => {
 			<Group>
 				<InputWrapper>
 					<InputTitle>
-						Number of copies
+						Number of editions
 						<span>
 							{Number(copies)} / {collectibleInfo.amount}
 						</span>
@@ -1179,7 +1179,7 @@ export const RaffleModal = props => {
 						type="number"
 						value={copies}
 						onChange={handleCopiesInput}
-						placeholder={`Number of copies for the lot`}
+						placeholder={`Number of editions for the lot`}
 					/>
 					<InputTitle>Duration</InputTitle>
 					<InputContainer
@@ -1417,7 +1417,7 @@ export const BuyModal = props => {
 			<Title>Buy</Title>
 			<Group>
 				<InputTitle>
-					Number of copies{" "}
+					Number of editions{" "}
 					<span>
 						{Number(copies)} / {collectibleInfo.amount}
 					</span>
@@ -1426,7 +1426,7 @@ export const BuyModal = props => {
 					type="number"
 					value={copies}
 					onChange={handleCopiesInput}
-					placeholder={`Number of copies to buy`}
+					placeholder={`Number of editions to buy`}
 				/>
 				<AnimBtn disabled={isLoading} onClick={handleClick}>
 					{buttonText}
