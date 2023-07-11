@@ -8,10 +8,10 @@ import { getInfuraURL } from "@utils/getIPFSURL";
 import LoadingIcon from "@static/svg/LoadingIcon";
 import { respondTo } from "@styles/styledMediaQuery";
 import useIsTabletOrMobile from "@utils/useIsTabletOMobile";
-import bread from "@utils/bread";
 import CardSectionContainer from "@elements/Default/CardSectionContainer";
 import Wrapper from "@elements/ProfileRedesign/Wrapper";
 import { getBackend } from "@utils/network";
+import { useErrorModalHelper } from "@elements/Default/ErrorModal";
 
 const Container = styled.div`
 	position: absolute;
@@ -44,6 +44,8 @@ const CollectionsSection = () => {
 	);
 	const [isLoading, setIsLoading] = useState(true);
 	const isTabletOrMobile = useIsTabletOrMobile();
+	const { showErrorModal } = useErrorModalHelper();
+
 	useEffect(() => {
 		axios
 			.get(`${getBackend()}/get/collections/owner/${userID}`)
@@ -55,7 +57,9 @@ const CollectionsSection = () => {
 				setCards(
 					res.data.collections.map(item => {
 						return {
-							src: getInfuraURL(item.data.thumbnail || item.data.image),
+							src: getInfuraURL(
+								item.data.thumbnail || item.data.image
+							),
 							title: item.data.name,
 							link: `/collections/${item.id}`,
 						};
@@ -63,7 +67,11 @@ const CollectionsSection = () => {
 				);
 			})
 			.catch(err => {
-				bread(err.response.data.error);
+				if (err.response.status === 404) {
+					setCards([]);
+				} else {
+					showErrorModal(err);
+				}
 			})
 			.finally(() => {
 				setIsLoading(false);
@@ -107,9 +115,15 @@ const CollectionsSection = () => {
 									/>
 								</>
 							))}
+
 						</CardSectionContainer>
 					)}
 				</>
+			)}
+			{(cards.length === 0) && !isLoading && (
+				<h3 style={{ textAlign: "center" }}>
+					No collections found
+				</h3>
 			)}
 		</Wrapper>
 	);

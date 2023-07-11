@@ -2,7 +2,8 @@ import React, { Suspense, useContext } from "react";
 import FullPageLoading from "@elements/Default/FullPageLoading";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CollectibleProvider from "@contexts/Collectible/CollectibleProvider";
-import TopBanner from "@components/Default/TopBanner";
+// import TopBanner from "@components/Default/TopBanner";
+// Removed top banner from routes
 import BreadContainer from "@components/Default/BreadContainer";
 import Sac from "@pages/Sac";
 import explorePages from "@routes/explorePages";
@@ -11,6 +12,7 @@ import Privacy from "@pages/Privacy";
 import { CollectionsSearch, UsersSearch } from "@pages/Search";
 import ErrorModal from "@elements/Default/ErrorModal";
 import ErrorContext from "@contexts/Error/ErrorContext";
+import BrandAssets from "@pages/BrandAssets";
 
 const Explore = React.lazy(() => import("@pages/Explore"));
 const Collectible = React.lazy(() => import("@pages/Collectible"));
@@ -35,7 +37,7 @@ const Routes = () => {
 					setModalIsOpen={setErrorModalIsOpen}
 					message={errorMessage}
 				/>
-				<TopBanner />
+				{/* <TopBanner /> */}
 				<Switch>
 					<Route path="/" exact component={Landing} />
 					{explorePaths.map(path => (
@@ -57,6 +59,7 @@ const Routes = () => {
 					<Route path="/sac/:id" exact component={Sac} />
 					<Route path="/terms-of-service" exact component={ToS} />
 					<Route path="/privacy-policy" exact component={Privacy} />
+					<Route path="/branding" exact component={BrandAssets} />
 					<Route path="/collectible/:addr/:ownerID?" exact>
 						<CollectibleProvider>
 							<Collectible />
