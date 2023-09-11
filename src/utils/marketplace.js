@@ -64,7 +64,7 @@ const fetchFeaturedItems = async () => {
 	if (data.error) {
 		return [];
 	}
-	return data.featured;
+	return data.featured.filter (item => item != null);
 }
 
 // returns collection info
