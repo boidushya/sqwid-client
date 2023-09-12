@@ -39,7 +39,7 @@ import { getInfuraURL } from "@utils/getIPFSURL";
 import Scrollbars from "react-custom-scrollbars";
 import { Component } from "react";
 import { moveCollectibleToCollection } from "@utils/moveCollectibleToCollection";
-import { BigNumber } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import { briefSearchAll } from "@utils/search";
 import { UserResult, UserResultText } from "@elements/Navbar/Search";
 import { getAvatarFromId } from "@utils/getAvatarFromId";
@@ -461,12 +461,27 @@ export const TransferModal = props => {
 			if (address.length) {
 				briefSearchAll (address).then (async res => {
 					setResults (res);
-					if (res.users.length === 0 && address.length === 42 && address.startsWith ("0x")) {
-						setAddressSelected (true);
-						setDisplayName (address);
-						setIsUnknownAddress (true);
+					if (res.users.length) {
+						if (res.users[0].evmAddress === address) {
+							setAddressSelected (true);
+							setDisplayName (res.users[0].displayName);
+						} else {
+							if (ethers.utils.isAddress (address)) {
+								setAddressSelected (true);
+								setDisplayName (address);
+							} else {
+								setAddressSelected (false);
+								setDisplayName ("");
+							}
+						}
 					} else {
-						setIsUnknownAddress (false);
+						if (ethers.utils.isAddress (address)) {
+							setAddressSelected (true);
+							setDisplayName (address);
+						} else {
+							setAddressSelected (false);
+							setDisplayName ("");
+						}
 					}
 				});
 			}

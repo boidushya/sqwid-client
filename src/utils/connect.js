@@ -62,7 +62,7 @@ const Connect = async account => {
 				}),
 			});
 		} catch (err) {
-			console.log(err);
+			// console.log(err); vercel won't deploy if there are console.logs because the linter throws warnings
 			throw err;
 		}
 
